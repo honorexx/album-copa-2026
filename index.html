@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Álbum Copa 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <header class="hero">
+    <h1>Álbum Copa 2026</h1>
+    <p>Controle suas figurinhas por país, extras e repetidas.</p>
+
+    <div class="progresso-box">
+      <div class="progresso-info">
+        <span>Progresso do álbum</span>
+        <strong id="porcentagemTopo">0%</strong>
+      </div>
+
+      <div class="progresso">
+        <div class="barra" id="barraProgresso"></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="resumo-geral">
+    <div class="resumo-card">
+      <span>Total</span>
+      <strong id="totalAlbum">0</strong>
+    </div>
+
+    <div class="resumo-card">
+      <span>Tenho</span>
+      <strong id="totalTenho">0</strong>
+    </div>
+
+    <div class="resumo-card">
+      <span>Faltando</span>
+      <strong id="totalFaltando">0</strong>
+    </div>
+
+    <div class="resumo-card destaque">
+      <span>Repetidas</span>
+      <strong id="totalRepetidas">0</strong>
+    </div>
+  </section>
+
+  <nav class="menu-rapido">
+    <button onclick="mostrarCategoria('todos')">Todos</button>
+    <button onclick="mostrarCategoria('paises')">Países</button>
+    <button onclick="mostrarCategoria('extras')">Extras</button>
+    <button onclick="mostrarRepetidas()">Só repetidas</button>
+  </nav>
+
+  <section class="layout">
+
+    <aside class="sidebar">
+      <input
+        type="text"
+        class="busca"
+        id="busca"
+        placeholder="Buscar país, código ou extra..."
+      >
+
+      <div class="abas" id="abas"></div>
+    </aside>
+
+    <main class="main">
+
+      <div class="pais-header">
+        <div class="pais-info">
+          <div id="paisFlag"></div>
+
+          <div>
+            <h2 id="paisNome"></h2>
+            <p id="paisDescricao"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-grid">
+        <div class="status-card">
+          <span>Tenho</span>
+          <strong id="paisTenho">0</strong>
+        </div>
+
+        <div class="status-card">
+          <span>Faltando</span>
+          <strong id="paisFaltando">0</strong>
+        </div>
+
+        <div class="status-card">
+          <span>Repetidas</span>
+          <strong id="paisRepetidas">0</strong>
+        </div>
+      </div>
+
+      <div class="grade" id="grade"></div>
+
+    </main>
+
+  </section>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

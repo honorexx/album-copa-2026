@@ -1,0 +1,295 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#eef2f7;
+  color:#0f172a;
+}
+
+.app{
+  max-width:1400px;
+  margin:auto;
+  padding:20px;
+}
+
+.hero{
+  background:linear-gradient(135deg,#0f172a,#0f766e,#2563eb);
+  color:white;
+  padding:30px;
+  border-radius:30px;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-size:42px;
+  margin-bottom:8px;
+}
+
+.hero p{
+  color:#dbeafe;
+}
+
+.progresso-box{
+  margin-top:20px;
+}
+
+.progresso-info{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.progresso{
+  height:18px;
+  background:rgba(255,255,255,0.2);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.barra{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#22c55e,#84cc16);
+}
+
+.resumo-geral{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:15px;
+}
+
+.resumo-card{
+  background:white;
+  padding:18px;
+  border-radius:20px;
+  box-shadow:0 8px 20px rgba(15,23,42,0.08);
+}
+
+.resumo-card span{
+  color:#64748b;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.resumo-card strong{
+  display:block;
+  font-size:30px;
+  margin-top:6px;
+}
+
+.resumo-card.destaque{
+  background:#fef3c7;
+}
+
+.menu-rapido{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+  overflow-x:auto;
+  padding-bottom:5px;
+}
+
+.menu-rapido button{
+  border:none;
+  background:white;
+  padding:12px 18px;
+  border-radius:999px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 6px 15px rgba(15,23,42,0.08);
+  white-space:nowrap;
+}
+
+.menu-rapido button:hover{
+  background:#0f766e;
+  color:white;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:20px;
+}
+
+.sidebar{
+  background:white;
+  border-radius:25px;
+  padding:15px;
+  max-height:75vh;
+  overflow:auto;
+}
+
+.busca{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid #cbd5e1;
+  margin-bottom:15px;
+}
+
+.abas{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.aba{
+  border:none;
+  background:#f8fafc;
+  border-radius:18px;
+  padding:12px;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.aba.ativa{
+  background:#0f766e;
+  color:white;
+}
+
+.aba-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.flag{
+  width:38px;
+  height:28px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+.icon-extra{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#e0f2fe;
+  font-size:22px;
+}
+
+.main{
+  background:white;
+  border-radius:25px;
+  padding:20px;
+}
+
+.pais-header{
+  margin-bottom:20px;
+}
+
+.pais-info{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.flag-large{
+  width:80px;
+  border-radius:12px;
+}
+
+.status-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.status-card{
+  background:#f8fafc;
+  padding:15px;
+  border-radius:18px;
+}
+
+.status-card span{
+  color:#64748b;
+  font-size:13px;
+}
+
+.status-card strong{
+  display:block;
+  font-size:26px;
+  margin-top:5px;
+}
+
+.grade{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  gap:12px;
+}
+
+.figurinha{
+  min-height:110px;
+  border-radius:20px;
+  border:2px solid #e2e8f0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  transition:0.2s;
+  background:white;
+}
+
+.figurinha:hover{
+  transform:translateY(-3px);
+}
+
+.figurinha strong{
+  font-size:22px;
+}
+
+.figurinha span{
+  font-size:12px;
+  margin-top:6px;
+}
+
+.tenho{
+  background:#dcfce7;
+  border-color:#22c55e;
+}
+
+.repetida{
+  background:#fef3c7;
+  border-color:#f59e0b;
+}
+
+@media(max-width:900px){
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+  .abas{
+    flex-direction:row;
+    overflow-x:auto;
+  }
+
+  .aba{
+    min-width:180px;
+  }
+}
+
+@media(max-width:700px){
+  .resumo-geral{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  .status-grid{
+    grid-template-columns:1fr;
+  }
+}
