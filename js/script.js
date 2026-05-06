@@ -68,36 +68,57 @@ const grade = document.getElementById("grade");
 const busca = document.getElementById("busca");
 
 async function iniciarApp(){
-  const { data: { session } } = await supabaseClient.auth.getSession();
+  try {
+    const { data, error } = await supabaseClient.auth.getSession();
 
-  if(!session){
-    window.location.href = "login.html";
-    return;
+    if(error){
+      console.error("Erro na sessão:", error);
+      return;
+    }
+
+    const session = data.session;
+
+    if(!session){
+      window.location.href = "login.html";
+      return;
+    }
+
+    usuarioAtual = session.user;
+
+    await carregarDados();
+    renderizarTudo();
+
+  } catch (erro) {
+    console.error("Erro ao iniciar app:", erro);
+    renderizarTudo();
   }
-
-  usuarioAtual = session.user;
-
-  await carregarDados();
-  renderizarTudo();
 }
 
 async function carregarDados(){
-  const { data, error } = await supabaseClient
-    .from("figurinhas")
-    .select("codigo, status")
-    .eq("user_id", usuarioAtual.id);
+  try {
+    const { data, error } = await supabaseClient
+      .from("figurinhas")
+      .select("codigo, status")
+      .eq("user_id", usuarioAtual.id);
 
-  if(error){
-    alert("Erro ao carregar figurinhas.");
-    console.error(error);
-    return;
+    if(error){
+      console.error("Erro ao carregar figurinhas:", error);
+      dados = {};
+      return;
+    }
+
+    dados = {};
+
+    if(data){
+      data.forEach(item => {
+        dados[item.codigo] = item.status;
+      });
+    }
+
+  } catch (erro) {
+    console.error("Erro inesperado ao carregar:", erro);
+    dados = {};
   }
-
-  dados = {};
-
-  data.forEach(item => {
-    dados[item.codigo] = item.status;
-  });
 }
 
 function getPais(sigla){
@@ -126,7 +147,7 @@ function atualizarResumo(){
   });
 
   const faltando = total - tenho;
-  const porcentagem = ((tenho / total) * 100).toFixed(1);
+  const porcentagem = total > 0 ? ((tenho / total) * 100).toFixed(1) : 0;
 
   document.getElementById("totalAlbum").innerText = total;
   document.getElementById("totalTenho").innerText = tenho;
@@ -142,13 +163,9 @@ function renderizarAbas(){
   const termo = busca.value.toUpperCase();
 
   paises.forEach(pais => {
-    if(categoriaAtual !== "todos" && pais.categoria !== categoriaAtual){
-      return;
-    }
+    if(categoriaAtual !== "todos" && pais.categoria !== categoriaAtual) return;
 
-    if(!pais.nome.toUpperCase().includes(termo) && !pais.sigla.includes(termo)){
-      return;
-    }
+    if(!pais.nome.toUpperCase().includes(termo) && !pais.sigla.includes(termo)) return;
 
     const button = document.createElement("button");
     button.className = pais.sigla === paisAtual && !modoRepetidas ? "aba ativa" : "aba";
@@ -179,6 +196,8 @@ function renderizarAbas(){
 
 function renderizarPais(){
   const pais = getPais(paisAtual);
+
+  if(!pais) return;
 
   const imagem = pais.bandeira
     ? `<img class="flag-large" src="${pais.bandeira}" alt="${pais.nome}">`
@@ -273,60 +292,72 @@ function renderizarTodasRepetidas(){
 
 async function alternarStatus(codigo){
   const atual = dados[codigo] || "faltando";
-
-  let novoStatus = "faltando";
+  let novoStatus;
 
   if(atual === "faltando"){
     novoStatus = "tenho";
     dados[codigo] = "tenho";
-  }
-
+  } 
   else if(atual === "tenho"){
     novoStatus = "repetida";
     dados[codigo] = "repetida";
-  }
-
-  else{
+  } 
+  else {
     novoStatus = "faltando";
     delete dados[codigo];
   }
 
-  await salvarFigurinha(codigo, novoStatus);
-
   renderizarTudo();
+
+  const salvou = await salvarFigurinha(codigo, novoStatus);
+
+  if(!salvou){
+    console.error("Não foi possível salvar no Supabase.");
+  }
 }
 
 async function salvarFigurinha(codigo, status){
-  if(!usuarioAtual) return;
+  if(!usuarioAtual) return false;
 
-  if(status === "faltando"){
-    const { error } = await supabaseClient
-      .from("figurinhas")
-      .delete()
-      .eq("user_id", usuarioAtual.id)
-      .eq("codigo", codigo);
+  try {
+    if(status === "faltando"){
+      const { error } = await supabaseClient
+        .from("figurinhas")
+        .delete()
+        .eq("user_id", usuarioAtual.id)
+        .eq("codigo", codigo);
 
-    if(error){
-      alert("Erro ao remover figurinha.");
-      console.error(error);
+      if(error){
+        console.error("Erro ao remover figurinha:", error);
+        return false;
+      }
+
+      return true;
     }
 
-    return;
-  }
+    const { error } = await supabaseClient
+      .from("figurinhas")
+      .upsert(
+        {
+          user_id: usuarioAtual.id,
+          codigo: codigo,
+          status: status
+        },
+        {
+          onConflict: "user_id,codigo"
+        }
+      );
 
-  const { error } = await supabaseClient
-    .from("figurinhas")
-    .upsert({
-      user_id: usuarioAtual.id,
-      codigo: codigo,
-      status: status
-    }, {
-      onConflict: "user_id,codigo"
-    });
+    if(error){
+      console.error("Erro ao salvar figurinha:", error);
+      return false;
+    }
 
-  if(error){
-    alert("Erro ao salvar figurinha.");
-    console.error(error);
+    return true;
+
+  } catch (erro) {
+    console.error("Erro inesperado ao salvar:", erro);
+    return false;
   }
 }
 
@@ -365,6 +396,8 @@ async function sair(){
   window.location.href = "login.html";
 }
 
-busca.addEventListener("input", renderizarAbas);
+if(busca){
+  busca.addEventListener("input", renderizarAbas);
+}
 
 iniciarApp();
