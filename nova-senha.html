@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova senha | Copa Stickers 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-body">
+
+<main class="auth-page">
+
+  <section class="auth-brand">
+    <div class="world-ball">🔑</div>
+    <h1>Crie uma nova senha</h1>
+    <p>Digite sua nova senha para recuperar o acesso ao seu álbum.</p>
+  </section>
+
+  <section class="auth-card">
+    <span class="auth-tag">Redefinição de senha</span>
+
+    <h2>Nova senha</h2>
+    <p class="auth-subtitle">Escolha uma senha segura.</p>
+
+    <label>Nova senha</label>
+    <input type="password" id="novaSenha" placeholder="Digite a nova senha">
+
+    <button class="btn-auth" onclick="atualizarSenha()">Salvar nova senha</button>
+
+    <p class="auth-link">
+      <a href="login.html">Voltar ao login</a>
+    </p>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+
+<script>
+async function atualizarSenha(){
+  const novaSenha = document.getElementById("novaSenha").value.trim();
+
+  if(!novaSenha){
+    alert("Digite uma nova senha.");
+    return;
+  }
+
+  const { error } = await supabaseClient.auth.updateUser({
+    password: novaSenha
+  });
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  alert("Senha alterada com sucesso!");
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
