@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar senha | Copa Stickers 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-body">
+
+<main class="auth-page">
+
+  <section class="auth-brand">
+    <div class="world-ball">🔐</div>
+    <h1>Recupere sua senha</h1>
+    <p>Informe seu email e enviaremos um link para você criar uma nova senha.</p>
+  </section>
+
+  <section class="auth-card">
+    <span class="auth-tag">Segurança da conta</span>
+
+    <h2>Esqueci minha senha</h2>
+    <p class="auth-subtitle">Você receberá um link no seu email.</p>
+
+    <label>Email cadastrado</label>
+    <input type="email" id="email" placeholder="seuemail@gmail.com">
+
+    <button class="btn-auth" onclick="recuperarSenha()">Enviar link</button>
+
+    <p class="auth-link">
+      Lembrou a senha?
+      <a href="login.html">Voltar ao login</a>
+    </p>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+
+<script>
+async function recuperarSenha(){
+  const email = document.getElementById("email").value.trim();
+
+  if(!email){
+    alert("Digite seu email.");
+    return;
+  }
+
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.origin + "/nova-senha.html"
+  });
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  alert("Link de recuperação enviado para seu email.");
+}
+</script>
+
+</body>
+</html>

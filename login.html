@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar | Copa Stickers 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-body">
+
+<main class="auth-page">
+
+  <section class="auth-brand">
+    <div class="world-ball">⚽</div>
+    <h1>Copa Stickers 2026</h1>
+    <p>Entre na sua conta e continue controlando seu álbum da Copa em qualquer dispositivo.</p>
+  </section>
+
+  <section class="auth-card">
+    <span class="auth-tag">Acesso do colecionador</span>
+
+    <h2>Entrar</h2>
+    <p class="auth-subtitle">Acesse seu progresso salvo na nuvem.</p>
+
+    <label>Email</label>
+    <input type="email" id="email" placeholder="seuemail@gmail.com">
+
+    <label>Senha</label>
+    <input type="password" id="senha" placeholder="Digite sua senha">
+
+    <button class="btn-auth" onclick="login()">Entrar no álbum</button>
+
+    <p class="auth-link">
+      <a href="recuperar-senha.html">Esqueci minha senha</a>
+    </p>
+
+    <p class="auth-link">
+      Ainda não tem conta?
+      <a href="cadastro.html">Criar conta</a>
+    </p>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+
+<script>
+async function login(){
+  const email = document.getElementById("email").value.trim();
+  const senha = document.getElementById("senha").value.trim();
+
+  if(!email || !senha){
+    alert("Preencha email e senha.");
+    return;
+  }
+
+  const { error } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password: senha
+  });
+
+  if(error){
+    alert("Email ou senha inválidos.");
+    return;
+  }
+
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
