@@ -1,4 +1,4 @@
-const selecoes = [
+const paises = [
 
   { nome:"Abertura", sigla:"FWC", icone:"🏆", quantidade:14, categoria:"extras" },
 
