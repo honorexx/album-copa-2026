@@ -721,4 +721,66 @@ input:focus{
     padding:26px;
     border-radius:28px;
   }
+
+  .hero .corner-flag{
+  position:absolute;
+  width:70px;
+  height:70px;
+  opacity:.18;
+}
+
+.corner-left{
+  left:20px;
+  bottom:20px;
+}
+
+.corner-right{
+  right:20px;
+  bottom:20px;
+  transform:scaleX(-1);
+}
+
+.hero .corner-flag::before{
+  content:"";
+  position:absolute;
+  left:18px;
+  top:8px;
+  width:4px;
+  height:55px;
+  background:white;
+  border-radius:20px;
+}
+
+.hero .corner-flag::after{
+  content:"";
+  position:absolute;
+  left:22px;
+  top:8px;
+  width:28px;
+  height:18px;
+  background:
+    linear-gradient(
+      45deg,
+      #facc15 0%,
+      #facc15 50%,
+      #ef4444 50%,
+      #ef4444 100%
+    );
+  border-radius:4px;
+}
+
+/* PRODUZIDO POR */
+
+.creditos{
+  margin-top:28px;
+  text-align:center;
+  color:rgba(255,255,255,.55);
+  font-size:13px;
+  letter-spacing:.5px;
+}
+
+.creditos strong{
+  color:#facc15;
+}
+
 }
