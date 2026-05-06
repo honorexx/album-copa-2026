@@ -281,13 +281,13 @@ function renderizarTodasRepetidas(){
   document.getElementById("paisRepetidas").innerText = totalRepetidas;
 
   if(totalRepetidas === 0){
-    grade.innerHTML = `
-      <div class="figurinha">
-        <strong>0</strong>
-        <span>Nenhuma repetida</span>
-      </div>
-    `;
-  }
+  grade.innerHTML = `
+    <div class="figurinha vazio-repetidas">
+      <strong>0</strong>
+      <span>Nenhuma repetida</span>
+    </div>
+  `;
+}
 }
 
 async function alternarStatus(codigo){
