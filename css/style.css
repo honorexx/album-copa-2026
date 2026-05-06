@@ -6,58 +6,71 @@
 }
 
 :root{
-  --campo:#064e3b;
-  --campo2:#052e22;
-  --noite:#020617;
-  --card:#071a2f;
-  --card2:#0b2742;
-  --verde:#00d084;
-  --verde-escuro:#047857;
-  --dourado:#facc15;
+  --bg:#050816;
+  --bg2:#07111f;
+  --campo:#073b2a;
+  --card:#0b1729;
+  --card2:#101f35;
+
+  --vermelho:#e11d48;
   --azul:#2563eb;
-  --azul2:#1d4ed8;
-  --vermelho:#ef4444;
-  --texto:#ffffff;
-  --muted:#b8c7d9;
-  --linha:rgba(255,255,255,.15);
+  --verde:#00d084;
+
+  --branco:#ffffff;
+  --muted:#9fb0c7;
+  --linha:rgba(255,255,255,.10);
 }
 
 body{
   min-height:100vh;
-  color:var(--texto);
+  color:var(--branco);
   background:
-    radial-gradient(circle at 15% 10%, rgba(0,208,132,.30), transparent 28%),
-    radial-gradient(circle at 85% 5%, rgba(37,99,235,.32), transparent 30%),
-    radial-gradient(circle at 50% 100%, rgba(250,204,21,.18), transparent 35%),
-    linear-gradient(135deg,var(--noite),var(--campo2) 55%,#020617);
+    radial-gradient(circle at 8% 12%, rgba(225,29,72,.28), transparent 22%),
+    radial-gradient(circle at 90% 10%, rgba(37,99,235,.25), transparent 24%),
+    radial-gradient(circle at 50% 105%, rgba(0,208,132,.22), transparent 30%),
+    linear-gradient(135deg,#030712,#07111f 45%,#052e22);
   position:relative;
   overflow-x:hidden;
 }
 
+/* campo de futebol */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.16;
+  opacity:.13;
   background:
-    linear-gradient(90deg, transparent 49.8%, rgba(255,255,255,.50) 50%, transparent 50.2%),
-    radial-gradient(circle at 50% 50%, transparent 0 92px, rgba(255,255,255,.42) 93px 96px, transparent 97px),
-    linear-gradient(rgba(255,255,255,.20) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+    linear-gradient(90deg, transparent 49.8%, rgba(255,255,255,.55) 50%, transparent 50.2%),
+    radial-gradient(circle at 50% 50%, transparent 0 92px, rgba(255,255,255,.55) 93px 96px, transparent 97px),
+    linear-gradient(rgba(255,255,255,.18) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
   background-size:100% 100%, 100% 100%, 100% 180px, 90px 100%;
 }
 
+/* linhas estilo bola 2026 */
 body::after{
-  content:"⚽";
+  content:"";
   position:fixed;
-  right:7%;
-  top:9%;
-  font-size:78px;
+  right:-90px;
+  top:40px;
+  width:430px;
+  height:430px;
+  border-radius:50%;
+  background:
+    conic-gradient(
+      from 20deg,
+      transparent 0 8%,
+      rgba(225,29,72,.30) 8% 16%,
+      transparent 16% 28%,
+      rgba(37,99,235,.28) 28% 37%,
+      transparent 37% 55%,
+      rgba(0,208,132,.28) 55% 64%,
+      transparent 64% 100%
+    );
+  filter:blur(.2px);
+  opacity:.45;
   z-index:0;
-  opacity:.18;
-  filter:drop-shadow(-28px 18px 12px rgba(0,208,132,.55));
-  transform:rotate(-18deg);
 }
 
 .app{
@@ -73,36 +86,39 @@ body::after{
   position:relative;
   overflow:hidden;
   padding:38px;
-  border-radius:36px;
+  border-radius:34px;
   margin-bottom:18px;
   background:
-    linear-gradient(135deg, rgba(3,12,27,.95), rgba(6,78,59,.92)),
-    radial-gradient(circle at right top, rgba(250,204,21,.32), transparent 35%);
-  border:1px solid rgba(255,255,255,.16);
-  box-shadow:0 25px 80px rgba(0,0,0,.42);
+    linear-gradient(135deg,rgba(11,23,41,.96),rgba(8,31,49,.92)),
+    radial-gradient(circle at 15% 20%, rgba(225,29,72,.22), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(37,99,235,.20), transparent 30%),
+    radial-gradient(circle at 70% 90%, rgba(0,208,132,.18), transparent 30%);
+  border:1px solid rgba(255,255,255,.11);
+  box-shadow:0 28px 80px rgba(0,0,0,.48);
 }
 
 .hero::before{
   content:"";
   position:absolute;
-  right:42px;
-  bottom:-70px;
-  width:330px;
-  height:160px;
-  border:4px solid rgba(255,255,255,.14);
+  right:38px;
+  bottom:-74px;
+  width:340px;
+  height:170px;
+  border:4px solid rgba(255,255,255,.13);
   border-bottom:none;
-  border-radius:160px 160px 0 0;
+  border-radius:180px 180px 0 0;
 }
 
 .hero::after{
-  content:"WORLD CUP";
+  content:"FIFA WORLD CUP 2026";
   position:absolute;
-  right:34px;
-  top:30px;
-  color:rgba(255,255,255,.08);
-  font-size:56px;
-  font-weight:900;
-  letter-spacing:2px;
+  right:32px;
+  top:26px;
+  color:rgba(255,255,255,.055);
+  font-size:52px;
+  font-weight:950;
+  letter-spacing:3px;
+  white-space:nowrap;
 }
 
 .hero h1{
@@ -114,8 +130,18 @@ body::after{
   z-index:1;
 }
 
+.hero h1::after{
+  content:"";
+  display:block;
+  width:180px;
+  height:6px;
+  margin-top:14px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--vermelho),var(--azul),var(--verde));
+}
+
 .hero p{
-  color:#dbeafe;
+  color:#cbd5e1;
   font-size:18px;
   line-height:1.5;
   position:relative;
@@ -133,20 +159,20 @@ body::after{
   justify-content:space-between;
   align-items:center;
   margin-bottom:9px;
-  color:#e0f2fe;
+  color:#dbeafe;
   font-size:14px;
   font-weight:800;
 }
 
 .progresso-info strong{
-  color:var(--dourado);
+  color:white;
   font-size:18px;
 }
 
 .progresso{
   height:18px;
   border-radius:999px;
-  background:rgba(255,255,255,.15);
+  background:rgba(255,255,255,.12);
   overflow:hidden;
   border:1px solid rgba(255,255,255,.12);
 }
@@ -155,8 +181,8 @@ body::after{
   width:0%;
   height:100%;
   border-radius:999px;
-  background:linear-gradient(90deg,var(--verde),var(--dourado),var(--azul));
-  box-shadow:0 0 28px rgba(250,204,21,.42);
+  background:linear-gradient(90deg,var(--vermelho),var(--azul),var(--verde));
+  box-shadow:0 0 28px rgba(37,99,235,.35);
   transition:.35s;
 }
 
@@ -172,8 +198,8 @@ body::after{
   overflow:hidden;
   padding:22px;
   border-radius:26px;
-  background:linear-gradient(145deg,rgba(7,26,47,.94),rgba(11,39,66,.84));
-  border:1px solid rgba(255,255,255,.13);
+  background:linear-gradient(145deg,rgba(11,23,41,.95),rgba(16,31,53,.90));
+  border:1px solid rgba(255,255,255,.10);
   box-shadow:0 18px 42px rgba(0,0,0,.30);
   backdrop-filter:blur(16px);
 }
@@ -181,12 +207,13 @@ body::after{
 .resumo-card::after{
   content:"";
   position:absolute;
-  right:-45px;
-  top:-45px;
-  width:100px;
-  height:100px;
+  right:-42px;
+  top:-42px;
+  width:105px;
+  height:105px;
   border-radius:50%;
-  background:rgba(0,208,132,.14);
+  background:conic-gradient(var(--vermelho),var(--azul),var(--verde),var(--vermelho));
+  opacity:.18;
 }
 
 .resumo-card span{
@@ -206,8 +233,10 @@ body::after{
 }
 
 .resumo-card.destaque{
-  background:linear-gradient(135deg,rgba(250,204,21,.30),rgba(7,26,47,.90));
-  border-color:rgba(250,204,21,.42);
+  border-color:rgba(37,99,235,.35);
+  background:
+    linear-gradient(145deg,rgba(11,23,41,.95),rgba(16,31,53,.90)),
+    radial-gradient(circle at right top,rgba(37,99,235,.24),transparent 40%);
 }
 
 .menu-rapido{
@@ -225,16 +254,16 @@ body::after{
   cursor:pointer;
   font-weight:950;
   color:white;
-  background:rgba(255,255,255,.11);
-  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.11);
   transition:.2s;
   white-space:nowrap;
 }
 
 .menu-rapido button:hover{
   transform:translateY(-2px);
-  background:linear-gradient(135deg,var(--verde-escuro),var(--azul));
-  box-shadow:0 12px 28px rgba(0,208,132,.22);
+  background:linear-gradient(135deg,rgba(225,29,72,.75),rgba(37,99,235,.75),rgba(0,208,132,.75));
+  box-shadow:0 14px 34px rgba(37,99,235,.22);
 }
 
 .layout{
@@ -245,11 +274,13 @@ body::after{
 
 .sidebar,
 .main{
-  background:linear-gradient(145deg,rgba(7,26,47,.92),rgba(5,46,34,.86));
-  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(145deg,rgba(11,23,41,.94),rgba(16,31,53,.88));
+  border:1px solid rgba(255,255,255,.10);
   border-radius:32px;
   box-shadow:0 22px 60px rgba(0,0,0,.34);
   backdrop-filter:blur(18px);
+  position:relative;
+  overflow:hidden;
 }
 
 .sidebar{
@@ -258,25 +289,52 @@ body::after{
   overflow:auto;
 }
 
+.sidebar::after{
+  content:"FIFA";
+  position:absolute;
+  bottom:22px;
+  right:18px;
+  font-size:56px;
+  font-weight:950;
+  letter-spacing:2px;
+  color:rgba(255,255,255,.035);
+  pointer-events:none;
+}
+
+.main::after{
+  content:"";
+  position:absolute;
+  right:22px;
+  top:22px;
+  width:92px;
+  height:58px;
+  opacity:.07;
+  background:
+    linear-gradient(68deg, transparent 0 26%, white 27% 37%, transparent 38%),
+    linear-gradient(68deg, transparent 0 43%, white 44% 54%, transparent 55%),
+    linear-gradient(68deg, transparent 0 60%, white 61% 71%, transparent 72%);
+  pointer-events:none;
+}
+
 .busca{
   width:100%;
   padding:16px;
   margin-bottom:14px;
   border-radius:18px;
-  border:1px solid rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.12);
   outline:none;
-  background:rgba(255,255,255,.09);
+  background:rgba(255,255,255,.06);
   color:white;
   font-size:15px;
 }
 
 .busca::placeholder{
-  color:#a8b8cc;
+  color:#93a4ba;
 }
 
 .busca:focus{
-  border-color:var(--dourado);
-  box-shadow:0 0 0 4px rgba(250,204,21,.14);
+  border-color:rgba(0,208,132,.45);
+  box-shadow:0 0 0 4px rgba(0,208,132,.10);
 }
 
 .abas{
@@ -291,7 +349,7 @@ body::after{
   padding:12px;
   border-radius:20px;
   cursor:pointer;
-  background:rgba(255,255,255,.075);
+  background:rgba(255,255,255,.055);
   color:white;
   border:1px solid transparent;
   display:flex;
@@ -304,14 +362,14 @@ body::after{
 
 .aba:hover{
   transform:translateX(3px);
-  border-color:rgba(250,204,21,.42);
-  background:rgba(250,204,21,.10);
+  border-color:rgba(0,208,132,.26);
+  background:rgba(0,208,132,.075);
 }
 
 .aba.ativa{
-  background:linear-gradient(135deg,var(--verde-escuro),var(--azul2));
-  border-color:rgba(255,255,255,.28);
-  box-shadow:0 14px 30px rgba(37,99,235,.25);
+  background:linear-gradient(135deg,rgba(225,29,72,.82),rgba(37,99,235,.82),rgba(0,208,132,.82));
+  border-color:rgba(255,255,255,.25);
+  box-shadow:0 14px 34px rgba(37,99,235,.22);
 }
 
 .aba-left{
@@ -328,7 +386,7 @@ body::after{
 .aba small{
   display:block;
   margin-top:3px;
-  color:#dbeafe;
+  color:#cbd5e1;
   font-size:11px;
 }
 
@@ -347,8 +405,8 @@ body::after{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:rgba(250,204,21,.16);
-  border:1px solid rgba(250,204,21,.36);
+  background:linear-gradient(135deg,rgba(225,29,72,.18),rgba(37,99,235,.18),rgba(0,208,132,.18));
+  border:1px solid rgba(255,255,255,.12);
   font-size:24px;
 }
 
@@ -360,7 +418,7 @@ body::after{
 .pais-header{
   padding-bottom:18px;
   margin-bottom:18px;
-  border-bottom:1px solid rgba(255,255,255,.14);
+  border-bottom:1px solid rgba(255,255,255,.12);
 }
 
 .pais-info{
@@ -396,8 +454,8 @@ body::after{
 .status-card{
   padding:17px;
   border-radius:22px;
-  background:rgba(255,255,255,.075);
-  border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.10);
 }
 
 .status-card span{
@@ -426,8 +484,9 @@ body::after{
   overflow:hidden;
   min-height:114px;
   border-radius:24px;
-  border:2px solid rgba(255,255,255,.13);
-  background:rgba(255,255,255,.065);
+  border:1px solid rgba(255,255,255,.10);
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
   color:white;
   cursor:pointer;
   display:flex;
@@ -441,12 +500,16 @@ body::after{
   content:"";
   position:absolute;
   inset:0;
-  background:radial-gradient(circle at top left, rgba(255,255,255,.18), transparent 42%);
-  opacity:.8;
+  opacity:.42;
+  background:
+    linear-gradient(115deg, transparent 0 26%, rgba(225,29,72,.18) 27% 31%, transparent 32%),
+    linear-gradient(140deg, transparent 0 44%, rgba(37,99,235,.18) 45% 49%, transparent 50%),
+    linear-gradient(70deg, transparent 0 64%, rgba(0,208,132,.16) 65% 69%, transparent 70%);
 }
 
 .figurinha:hover{
   transform:translateY(-4px) scale(1.01);
+  border-color:rgba(255,255,255,.22);
   box-shadow:0 18px 38px rgba(0,0,0,.34);
 }
 
@@ -469,27 +532,25 @@ body::after{
 }
 
 .figurinha.tenho{
-  background:linear-gradient(135deg,rgba(0,208,132,.34),rgba(4,120,87,.20));
-  border-color:var(--verde);
-  box-shadow:0 0 22px rgba(0,208,132,.14);
+  background:linear-gradient(135deg,rgba(0,208,132,.24),rgba(255,255,255,.035));
+  border-color:rgba(0,208,132,.55);
+  box-shadow:0 0 22px rgba(0,208,132,.12);
 }
 
 .figurinha.repetida{
-  background:linear-gradient(135deg,rgba(250,204,21,.36),rgba(239,68,68,.14));
-  border-color:var(--dourado);
-  box-shadow:0 0 22px rgba(250,204,21,.16);
+  background:linear-gradient(135deg,rgba(225,29,72,.22),rgba(37,99,235,.11));
+  border-color:rgba(225,29,72,.55);
+  box-shadow:0 0 22px rgba(225,29,72,.12);
 }
 
 .vazio-repetidas{
   width:100% !important;
   min-height:180px !important;
   grid-column:1 / -1;
-
   display:flex !important;
   flex-direction:column !important;
   align-items:center !important;
   justify-content:center !important;
-
   text-align:center !important;
   cursor:default !important;
 }
@@ -501,14 +562,14 @@ body::after{
 .vazio-repetidas strong{
   font-size:58px !important;
   line-height:1 !important;
-  color:var(--dourado) !important;
+  color:white !important;
 }
 
 .vazio-repetidas span{
   margin-top:10px !important;
   font-size:22px !important;
   font-weight:900 !important;
-  color:white !important;
+  color:#cbd5e1 !important;
   text-transform:none !important;
 }
 
@@ -540,14 +601,14 @@ body::after{
   width:96px;
   height:96px;
   border-radius:50%;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.22);
+  background:linear-gradient(135deg,rgba(225,29,72,.18),rgba(37,99,235,.18),rgba(0,208,132,.18));
+  border:1px solid rgba(255,255,255,.18);
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:46px;
   margin-bottom:24px;
-  box-shadow:0 0 45px rgba(250,204,21,.30);
+  box-shadow:0 0 45px rgba(37,99,235,.24);
 }
 
 .auth-brand h1{
@@ -565,8 +626,8 @@ body::after{
 }
 
 .auth-card{
-  background:linear-gradient(145deg,rgba(7,26,47,.94),rgba(5,46,34,.88));
-  border:1px solid rgba(255,255,255,.15);
+  background:linear-gradient(145deg,rgba(11,23,41,.96),rgba(16,31,53,.90));
+  border:1px solid rgba(255,255,255,.12);
   border-radius:34px;
   padding:36px;
   color:white;
@@ -576,9 +637,9 @@ body::after{
 
 .auth-tag{
   display:inline-block;
-  background:rgba(250,204,21,.15);
-  color:var(--dourado);
-  border:1px solid rgba(250,204,21,.36);
+  background:rgba(37,99,235,.14);
+  color:#dbeafe;
+  border:1px solid rgba(37,99,235,.35);
   padding:8px 13px;
   border-radius:999px;
   font-size:12px;
@@ -609,8 +670,8 @@ input{
   width:100%;
   padding:15px;
   border-radius:16px;
-  border:1px solid rgba(255,255,255,.15);
-  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
   color:white;
   outline:none;
   margin-bottom:15px;
@@ -618,12 +679,12 @@ input{
 }
 
 input::placeholder{
-  color:#9cafc4;
+  color:#93a4ba;
 }
 
 input:focus{
-  border-color:var(--dourado);
-  box-shadow:0 0 0 4px rgba(250,204,21,.14);
+  border-color:rgba(0,208,132,.45);
+  box-shadow:0 0 0 4px rgba(0,208,132,.10);
 }
 
 .btn-auth{
@@ -631,8 +692,8 @@ input:focus{
   border:none;
   border-radius:18px;
   padding:16px;
-  background:linear-gradient(135deg,var(--dourado),#fff176);
-  color:#06111f;
+  background:linear-gradient(135deg,var(--vermelho),var(--azul),var(--verde));
+  color:white;
   font-weight:950;
   font-size:16px;
   cursor:pointer;
@@ -642,7 +703,7 @@ input:focus{
 
 .btn-auth:hover{
   transform:translateY(-2px);
-  box-shadow:0 18px 38px rgba(250,204,21,.24);
+  box-shadow:0 18px 38px rgba(37,99,235,.24);
 }
 
 .auth-link{
@@ -652,13 +713,13 @@ input:focus{
 }
 
 .auth-link a{
-  color:var(--dourado);
+  color:#93c5fd;
   font-weight:950;
   text-decoration:none;
 }
 
 .btn-sair{
-  background:linear-gradient(135deg,var(--vermelho),#fb7185);
+  background:linear-gradient(135deg,var(--vermelho),var(--azul));
   color:white;
   border:none;
   padding:10px 18px;
@@ -670,7 +731,7 @@ input:focus{
 
 .btn-sair:hover{
   transform:translateY(-2px);
-  box-shadow:0 12px 26px rgba(239,68,68,.25);
+  box-shadow:0 12px 26px rgba(225,29,72,.25);
 }
 
 .creditos{
@@ -682,47 +743,7 @@ input:focus{
 }
 
 .creditos strong{
-  color:var(--dourado);
-}
-
-.hero .corner-flag{
-  position:absolute;
-  width:70px;
-  height:70px;
-  opacity:.18;
-}
-
-.corner-left{
-  left:20px;
-  bottom:20px;
-}
-
-.corner-right{
-  right:20px;
-  bottom:20px;
-  transform:scaleX(-1);
-}
-
-.hero .corner-flag::before{
-  content:"";
-  position:absolute;
-  left:18px;
-  top:8px;
-  width:4px;
-  height:55px;
-  background:white;
-  border-radius:20px;
-}
-
-.hero .corner-flag::after{
-  content:"";
-  position:absolute;
-  left:22px;
-  top:8px;
-  width:28px;
-  height:18px;
-  background:linear-gradient(45deg,#facc15 0%,#facc15 50%,#ef4444 50%,#ef4444 100%);
-  border-radius:4px;
+  color:white;
 }
 
 @media(max-width:900px){
@@ -785,7 +806,7 @@ input:focus{
   }
 
   .hero::after{
-    font-size:34px;
+    font-size:30px;
     right:20px;
     top:18px;
   }
