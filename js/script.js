@@ -1,6 +1,8 @@
-const paises = [
+const selecoes = [
+
   { nome:"Abertura", sigla:"FWC", icone:"🏆", quantidade:14, categoria:"extras" },
 
+  // AMÉRICA DO SUL
   { nome:"Brasil", sigla:"BRA", bandeira:"https://flagcdn.com/w80/br.png", quantidade:20, categoria:"paises" },
   { nome:"Argentina", sigla:"ARG", bandeira:"https://flagcdn.com/w80/ar.png", quantidade:20, categoria:"paises" },
   { nome:"Uruguai", sigla:"URU", bandeira:"https://flagcdn.com/w80/uy.png", quantidade:20, categoria:"paises" },
@@ -8,18 +10,21 @@ const paises = [
   { nome:"Equador", sigla:"ECU", bandeira:"https://flagcdn.com/w80/ec.png", quantidade:20, categoria:"paises" },
   { nome:"Colômbia", sigla:"COL", bandeira:"https://flagcdn.com/w80/co.png", quantidade:20, categoria:"paises" },
 
+  // CONCACAF
   { nome:"México", sigla:"MEX", bandeira:"https://flagcdn.com/w80/mx.png", quantidade:20, categoria:"paises" },
   { nome:"Estados Unidos", sigla:"USA", bandeira:"https://flagcdn.com/w80/us.png", quantidade:20, categoria:"paises" },
   { nome:"Canadá", sigla:"CAN", bandeira:"https://flagcdn.com/w80/ca.png", quantidade:20, categoria:"paises" },
   { nome:"Panamá", sigla:"PAN", bandeira:"https://flagcdn.com/w80/pa.png", quantidade:20, categoria:"paises" },
   { nome:"Haiti", sigla:"HAI", bandeira:"https://flagcdn.com/w80/ht.png", quantidade:20, categoria:"paises" },
   { nome:"Costa Rica", sigla:"CRC", bandeira:"https://flagcdn.com/w80/cr.png", quantidade:20, categoria:"paises" },
+  { nome:"Curaçao", sigla:"CUW", bandeira:"https://flagcdn.com/w80/cw.png", quantidade:20, categoria:"paises" },
+  { nome:"Catar", sigla:"QAT", bandeira:"https://flagcdn.com/w80/qa.png", quantidade:20, categoria:"paises" },
 
+  // EUROPA
   { nome:"Alemanha", sigla:"GER", bandeira:"https://flagcdn.com/w80/de.png", quantidade:20, categoria:"paises" },
   { nome:"França", sigla:"FRA", bandeira:"https://flagcdn.com/w80/fr.png", quantidade:20, categoria:"paises" },
   { nome:"Portugal", sigla:"POR", bandeira:"https://flagcdn.com/w80/pt.png", quantidade:20, categoria:"paises" },
   { nome:"Espanha", sigla:"ESP", bandeira:"https://flagcdn.com/w80/es.png", quantidade:20, categoria:"paises" },
-  { nome:"Itália", sigla:"ITA", bandeira:"https://flagcdn.com/w80/it.png", quantidade:20, categoria:"paises" },
   { nome:"Inglaterra", sigla:"ENG", bandeira:"https://flagcdn.com/w80/gb-eng.png", quantidade:20, categoria:"paises" },
   { nome:"Holanda", sigla:"NED", bandeira:"https://flagcdn.com/w80/nl.png", quantidade:20, categoria:"paises" },
   { nome:"Bélgica", sigla:"BEL", bandeira:"https://flagcdn.com/w80/be.png", quantidade:20, categoria:"paises" },
@@ -29,19 +34,22 @@ const paises = [
   { nome:"Escócia", sigla:"SCO", bandeira:"https://flagcdn.com/w80/gb-sct.png", quantidade:20, categoria:"paises" },
   { nome:"Suécia", sigla:"SWE", bandeira:"https://flagcdn.com/w80/se.png", quantidade:20, categoria:"paises" },
   { nome:"Noruega", sigla:"NOR", bandeira:"https://flagcdn.com/w80/no.png", quantidade:20, categoria:"paises" },
-  { nome:"Polônia", sigla:"POL", bandeira:"https://flagcdn.com/w80/pl.png", quantidade:20, categoria:"paises" },
-  { nome:"Sérvia", sigla:"SRB", bandeira:"https://flagcdn.com/w80/rs.png", quantidade:20, categoria:"paises" },
   { nome:"Tchéquia", sigla:"CZE", bandeira:"https://flagcdn.com/w80/cz.png", quantidade:20, categoria:"paises" },
+  { nome:"Áustria", sigla:"AUT", bandeira:"https://flagcdn.com/w80/at.png", quantidade:20, categoria:"paises" },
+  { nome:"Bósnia e Herzegovina", sigla:"BIH", bandeira:"https://flagcdn.com/w80/ba.png", quantidade:20, categoria:"paises" },
+  { nome:"Dinamarca", sigla:"DEN", bandeira:"https://flagcdn.com/w80/dk.png", quantidade:20, categoria:"paises" },
 
+  // ÁSIA
   { nome:"Japão", sigla:"JPN", bandeira:"https://flagcdn.com/w80/jp.png", quantidade:20, categoria:"paises" },
   { nome:"Coreia do Sul", sigla:"KOR", bandeira:"https://flagcdn.com/w80/kr.png", quantidade:20, categoria:"paises" },
   { nome:"Austrália", sigla:"AUS", bandeira:"https://flagcdn.com/w80/au.png", quantidade:20, categoria:"paises" },
-  { nome:"Qatar", sigla:"QAT", bandeira:"https://flagcdn.com/w80/qa.png", quantidade:20, categoria:"paises" },
   { nome:"Arábia Saudita", sigla:"KSA", bandeira:"https://flagcdn.com/w80/sa.png", quantidade:20, categoria:"paises" },
   { nome:"Irã", sigla:"IRN", bandeira:"https://flagcdn.com/w80/ir.png", quantidade:20, categoria:"paises" },
   { nome:"Uzbequistão", sigla:"UZB", bandeira:"https://flagcdn.com/w80/uz.png", quantidade:20, categoria:"paises" },
   { nome:"Jordânia", sigla:"JOR", bandeira:"https://flagcdn.com/w80/jo.png", quantidade:20, categoria:"paises" },
+  { nome:"Iraque", sigla:"IRQ", bandeira:"https://flagcdn.com/w80/iq.png", quantidade:20, categoria:"paises" },
 
+  // ÁFRICA
   { nome:"Marrocos", sigla:"MAR", bandeira:"https://flagcdn.com/w80/ma.png", quantidade:20, categoria:"paises" },
   { nome:"Tunísia", sigla:"TUN", bandeira:"https://flagcdn.com/w80/tn.png", quantidade:20, categoria:"paises" },
   { nome:"Gana", sigla:"GHA", bandeira:"https://flagcdn.com/w80/gh.png", quantidade:20, categoria:"paises" },
@@ -49,12 +57,13 @@ const paises = [
   { nome:"Senegal", sigla:"SEN", bandeira:"https://flagcdn.com/w80/sn.png", quantidade:20, categoria:"paises" },
   { nome:"Egito", sigla:"EGY", bandeira:"https://flagcdn.com/w80/eg.png", quantidade:20, categoria:"paises" },
   { nome:"Argélia", sigla:"ALG", bandeira:"https://flagcdn.com/w80/dz.png", quantidade:20, categoria:"paises" },
-  { nome:"Nigéria", sigla:"NGA", bandeira:"https://flagcdn.com/w80/ng.png", quantidade:20, categoria:"paises" },
   { nome:"Costa do Marfim", sigla:"CIV", bandeira:"https://flagcdn.com/w80/ci.png", quantidade:20, categoria:"paises" },
-  { nome:"Camarões", sigla:"CMR", bandeira:"https://flagcdn.com/w80/cm.png", quantidade:20, categoria:"paises" },
+  { nome:"Cabo Verde", sigla:"CPV", bandeira:"https://flagcdn.com/w80/cv.png", quantidade:20, categoria:"paises" },
+  { nome:"República Democrática do Congo", sigla:"COD", bandeira:"https://flagcdn.com/w80/cd.png", quantidade:20, categoria:"paises" },
 
-  { nome:"Coca-Cola LATAM", sigla:"CCL", icone:"🥤", quantidade:14, categoria:"extras" },
-  { nome:"Coca-Cola USA", sigla:"CCU", icone:"🥤", quantidade:12, categoria:"extras" }
+  // OCEANIA
+  { nome:"Nova Zelândia", sigla:"NZL", bandeira:"https://flagcdn.com/w80/nz.png", quantidade:20, categoria:"paises" }
+
 ];
 
 let paisAtual = "BRA";
