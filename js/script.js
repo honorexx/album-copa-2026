@@ -1,5 +1,4 @@
 const paises = [
-
   { nome:"Abertura", sigla:"FWC", icone:"🏆", quantidade:14, categoria:"extras" },
 
   { nome:"Brasil", sigla:"BRA", bandeira:"https://flagcdn.com/w80/br.png", quantidade:20, categoria:"paises" },
@@ -56,18 +55,49 @@ const paises = [
 
   { nome:"Coca-Cola LATAM", sigla:"CCL", icone:"🥤", quantidade:14, categoria:"extras" },
   { nome:"Coca-Cola USA", sigla:"CCU", icone:"🥤", quantidade:12, categoria:"extras" }
-
 ];
 
 let paisAtual = "BRA";
 let categoriaAtual = "todos";
 let modoRepetidas = false;
-
-let dados = JSON.parse(localStorage.getItem("album-copa")) || {};
+let dados = {};
+let usuarioAtual = null;
 
 const abas = document.getElementById("abas");
 const grade = document.getElementById("grade");
 const busca = document.getElementById("busca");
+
+async function iniciarApp(){
+  const { data: { session } } = await supabaseClient.auth.getSession();
+
+  if(!session || !session.user){
+  window.location.replace("login.html");
+  return;
+}
+  usuarioAtual = session.user;
+
+  await carregarDados();
+  renderizarTudo();
+}
+
+async function carregarDados(){
+  const { data, error } = await supabaseClient
+    .from("figurinhas")
+    .select("codigo, status")
+    .eq("user_id", usuarioAtual.id);
+
+  if(error){
+    alert("Erro ao carregar figurinhas.");
+    console.error(error);
+    return;
+  }
+
+  dados = {};
+
+  data.forEach(item => {
+    dados[item.codigo] = item.status;
+  });
+}
 
 function getPais(sigla){
   return paises.find(p => p.sigla === sigla);
@@ -123,7 +153,7 @@ function renderizarAbas(){
     button.className = pais.sigla === paisAtual && !modoRepetidas ? "aba ativa" : "aba";
 
     const imagem = pais.bandeira
-      ? `<img class="flag" src="${pais.bandeira}">`
+      ? `<img class="flag" src="${pais.bandeira}" alt="${pais.nome}">`
       : `<div class="icon-extra">${pais.icone}</div>`;
 
     button.innerHTML = `
@@ -150,7 +180,7 @@ function renderizarPais(){
   const pais = getPais(paisAtual);
 
   const imagem = pais.bandeira
-    ? `<img class="flag-large" src="${pais.bandeira}">`
+    ? `<img class="flag-large" src="${pais.bandeira}" alt="${pais.nome}">`
     : `<div class="icon-extra">${pais.icone}</div>`;
 
   document.getElementById("paisFlag").innerHTML = imagem;
@@ -240,24 +270,63 @@ function renderizarTodasRepetidas(){
   }
 }
 
-function alternarStatus(codigo){
+async function alternarStatus(codigo){
   const atual = dados[codigo] || "faltando";
 
+  let novoStatus = "faltando";
+
   if(atual === "faltando"){
+    novoStatus = "tenho";
     dados[codigo] = "tenho";
   }
 
   else if(atual === "tenho"){
+    novoStatus = "repetida";
     dados[codigo] = "repetida";
   }
 
   else{
+    novoStatus = "faltando";
     delete dados[codigo];
   }
 
-  localStorage.setItem("album-copa", JSON.stringify(dados));
+  await salvarFigurinha(codigo, novoStatus);
 
   renderizarTudo();
+}
+
+async function salvarFigurinha(codigo, status){
+  if(!usuarioAtual) return;
+
+  if(status === "faltando"){
+    const { error } = await supabaseClient
+      .from("figurinhas")
+      .delete()
+      .eq("user_id", usuarioAtual.id)
+      .eq("codigo", codigo);
+
+    if(error){
+      alert("Erro ao remover figurinha.");
+      console.error(error);
+    }
+
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("figurinhas")
+    .upsert({
+      user_id: usuarioAtual.id,
+      codigo: codigo,
+      status: status
+    }, {
+      onConflict: "user_id,codigo"
+    });
+
+  if(error){
+    alert("Erro ao salvar figurinha.");
+    console.error(error);
+  }
 }
 
 function mostrarCategoria(categoria){
@@ -290,6 +359,11 @@ function renderizarTudo(){
   atualizarResumo();
 }
 
+async function sair(){
+  await supabaseClient.auth.signOut();
+  window.location.href = "login.html";
+}
+
 busca.addEventListener("input", renderizarAbas);
 
-renderizarTudo();
+iniciarApp();
